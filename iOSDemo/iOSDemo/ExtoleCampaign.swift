@@ -11,11 +11,10 @@ class ExtoleCampaign: ObservableObject {
     }
 
     func fetch() {
-        extole.fetchZone("cta_prefetch", [:]) { (zone: ExtoleMobileSDK.Zone?, _: ExtoleMobileSDK.Campaign?, error: Error?) in
-            let title = zone?.get("title") as! String? ?? ""
-            let touchEvent = zone?.get("touch_event") as! String? ?? ""
-            let image = zone?.get("image") as! String? ?? ""
-            self.cta = CTA(text: title, image: image, touchEvent: touchEvent)
+        extole.fetchZone("advocate_mobile_experience", [:]) { (zone: ExtoleMobileSDK.Zone?, _: ExtoleMobileSDK.Campaign?, _: Error?) in
+            let subject = zone?.get("sharing.email.subject") as! String? ?? "ERROR: EXTOLE REQUEST DIDN'T WORK"
+            let message = zone?.get("sharing.email.message") as! String? ?? "ERROR: EXTOLE REQUEST DIDN'T WORK"
+            self.cta = CTA(subject: subject, message: message)
         }
     }
 

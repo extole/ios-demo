@@ -1,13 +1,11 @@
 import Foundation
 
 public class CTA {
-    var text: String
-    var image: String
-    var touchEvent: String
-    
-    init(text: String = "", image: String = "Loading...", touchEvent: String = "") {
-        self.text = text
-        self.image = image
-        self.touchEvent = touchEvent
+    var subject: String
+    var message: String
+
+    init(subject: String = "", message: String = "") {
+        self.subject = subject
+        self.message = message
     }
 }

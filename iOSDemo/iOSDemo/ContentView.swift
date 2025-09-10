@@ -6,17 +6,11 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                AsyncImage(url: URL(string: extoleCampaign.cta.image))
-                    .frame(height: 400)
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.gray, lineWidth: 4))
-                    .shadow(radius: 7)
-                Button(extoleCampaign.cta.text) {
-                        extoleCampaign.extole.sendEvent(extoleCampaign.cta.touchEvent, [:], completion: { (idEvent, error) in
-                        })
-                    }.padding()
+                Text(extoleCampaign.cta.subject)
+                    .padding()
                 Spacer()
+                Text(extoleCampaign.cta.message)
+                    .padding()
             }.task {
                 extoleCampaign.fetch()
             }

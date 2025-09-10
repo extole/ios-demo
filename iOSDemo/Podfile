@@ -6,7 +6,7 @@ target 'iOSDemo' do
   use_frameworks!
 
   # Pods for iOSDemo
-  pod 'ExtoleMobileSDK', '>= 0.0.31'
+  pod 'ExtoleMobileSDK', '>= 0.0.90'
 
   target 'iOSDemoTests' do
     inherit! :search_paths
@@ -17,4 +17,12 @@ target 'iOSDemo' do
     # Pods for testing
   end
 
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "13.0"
+    end
+  end
 end
