@@ -3,22 +3,16 @@ import ExtoleMobileSDK
 
 struct ContentView: View {
     @EnvironmentObject var extoleCampaign: ExtoleCampaign
+    @State private var showWebView = false
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
-                AsyncImage(url: URL(string: extoleCampaign.cta.image))
-                    .frame(height: 400)
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.gray, lineWidth: 4))
-                    .shadow(radius: 7)
-                Button(extoleCampaign.cta.text) {
-                        extoleCampaign.extole.sendEvent(extoleCampaign.cta.touchEvent, [:], completion: { (idEvent, error) in
-                        })
-                    }.padding()
-                Spacer()
-            }.task {
-                extoleCampaign.fetch()
+                Button("Open WebView") {
+                    showWebView = true
+                }
+            }
+            .navigationDestination(isPresented: $showWebView) {
+                ContentWebView()
             }
         }
     }
